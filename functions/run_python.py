@@ -35,24 +35,27 @@ def run_python_file(working_directory, file_path, args=None):
         return "\n".join(output) if output else "No output produced."
     except Exception as e:
         return f"Error: executing Python file: {e}"
-    
+
+
 schema_run_python_file = types.FunctionDeclaration(
     name="run_python_file",
-    description="Runs a python file with the python 3 interpreter. Accepts additional CLI args as an optional array",
+    description="Executes a Python file within the working directory and returns the output from the interpreter.",
     parameters=types.Schema(
         type=types.Type.OBJECT,
         properties={
             "file_path": types.Schema(
                 type=types.Type.STRING,
-                description="The file to run, relative to the working directory. If not provided, lists files in the working directory itself.",
+                description="Path to the Python file to execute, relative to the working directory.",
             ),
             "args": types.Schema(
                 type=types.Type.ARRAY,
-                description="An optional array of strings to use as the CLI args for the python file.",
                 items=types.Schema(
-                    type=types.Type.STRING
+                    type=types.Type.STRING,
+                    description="Optional arguments to pass to the Python file.",
                 ),
-            )
+                description="Optional arguments to pass to the Python file.",
+            ),
         },
+        required=["file_path"],
     ),
 )
