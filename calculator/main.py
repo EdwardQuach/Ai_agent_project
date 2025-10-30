@@ -11,6 +11,15 @@ def main():
         print("Calculator App")
         print('Usage: python main.py "<expression>"')
         print('Example: python main.py "3 + 5"')
+        
+        # Add test case
+        test_expression = "3 + 7 * 2"
+        expected_result = 17
+        actual_result = calculator.evaluate(test_expression)
+        if actual_result != expected_result:
+            raise AssertionError(f"Test failed: {test_expression} should be {expected_result}, but got {actual_result}")
+        print("Test passed!")
+        
         return
 
     expression = " ".join(sys.argv[1:])
